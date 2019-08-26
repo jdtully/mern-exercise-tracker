@@ -3,7 +3,7 @@ export default class EditUsers extends Component {
   render() {
     return (
       <div>
-        <p>Edit USERS sTUB</p>
+        <p>Edit Users Stub</p>
       </div>
     );
   }
