@@ -20,8 +20,7 @@ const userSchema = new Schema(
     },
     usergender: {
       type: String,
-      trim: true,
-      enum: ["Male", "Female", "Undisclosed"]
+      trim: true
     }
   },
   { timestamps: true }

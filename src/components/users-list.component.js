@@ -8,7 +8,7 @@ const User = props => (
     <td>{props.user.usergender}</td>
     <td>{props.user.userage}</td>
     <td>
-      <Link to={"/users/edit" + props.user._id}>edit</Link> |{" "}
+      <Link to={"/users/edit/" + props.user._id}>edit</Link> |{" "}
       <a
         href="#"
         onClick={() => {
