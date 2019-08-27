@@ -5,8 +5,8 @@ import axios from "axios";
 const User = props => (
   <tr>
     <td>{props.user.username}</td>
-    <td>{props.user.gender}</td>
-    <td>{props.user.age}</td>
+    <td>{props.user.usergender}</td>
+    <td>{props.user.userage}</td>
     <td>
       <Link to={"/users/edit" + props.user._id}>edit</Link> |{" "}
       <a
