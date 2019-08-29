@@ -20,7 +20,7 @@ function App() {
         <Route path="/exercise/edit/:id" component={EditExercise} />
         <Route path="/exercise/add" component={CreateExercise} />
         <Route path="/users/add" component={CreateUser} />
-        <Route path="/users/" component={UserList} />
+        <Route path="/users/" exact component={UserList} />
         <Route path="/users/edit/:id" component={EditUser} />
       </div>
     </Router>

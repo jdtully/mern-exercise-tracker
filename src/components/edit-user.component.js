@@ -6,7 +6,7 @@ export default class EditUsers extends Component {
     super(props);
 
     this.onChangeUsername = this.onChangeUsername.bind(this);
-    this.onChangeUsergender = this.onChangeUsergender.bind(this);
+    this.handleOptionChange = this.handleOptionChange.bind(this);
     this.onChangeUserage = this.onChangeUserage.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
@@ -22,24 +22,11 @@ export default class EditUsers extends Component {
       .then(response => {
         this.setState({
           username: response.data.username,
-          usergender: response.data.description,
-          userage: response.data.duration
+          usergender: response.data.usergender,
+          userage: response.data.userage
         });
       })
       .catch(function(error) {
-        console.log(error);
-      });
-
-    axios
-      .get("http://localhost:5000/users/")
-      .then(response => {
-        if (response.data.length > 0) {
-          this.setState({
-            users: response.data.map(user => user.user)
-          });
-        }
-      })
-      .catch(error => {
         console.log(error);
       });
   }
@@ -48,12 +35,12 @@ export default class EditUsers extends Component {
       username: e.target.value
     });
   }
-  onChangeUsergender(e) {
+
+  handleOptionChange(e) {
     this.setState({
       usergender: e.target.value
     });
   }
-
   onChangeUserage(e) {
     this.setState({
       userage: e.target.value
@@ -72,12 +59,13 @@ export default class EditUsers extends Component {
     console.log(user);
     axios
       .post(
-        "http://localhost:5000/users/update" + this.props.match.params.id,
+        "http://localhost:5000/users/update/" + this.props.match.params.id,
         user
       )
       .then(res => console.log(res.data));
-    window.location = "/";
+    window.location = "/users/";
   }
+
   render() {
     return (
       <div>
@@ -85,7 +73,7 @@ export default class EditUsers extends Component {
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label>Username: </label>
-            <select
+            <input
               type="text"
               required
               className="form-control"
@@ -93,16 +81,37 @@ export default class EditUsers extends Component {
               onChange={this.onChangeUsername}
             />
           </div>
-          <div className="form-group">
-            <label>Gender: </label>
+          <div className="form-check">
             <input
-              type="text"
-              required
-              className="form-control"
-              value={this.state.usergender}
-              onChange={this.onChangeUsergender}
+              type="radio"
+              name="gender"
+              value="Male"
+              checked={this.state.usergender === "Male"}
+              onChange={this.handleOptionChange}
             />
+            Male
           </div>
+          <div className="form-check">
+            <input
+              type="radio"
+              name="gender"
+              value="Female"
+              checked={this.state.usergender === "Female"}
+              onChange={this.handleOptionChange}
+            />
+            Female
+          </div>
+          <div className="form-check">
+            <input
+              type="radio"
+              name="gender"
+              value="Other"
+              checked={this.state.usergender === "Other"}
+              onChange={this.handleOptionChange}
+            />
+            Other
+          </div>
+
           <div className="form-group">
             <label>Age: </label>
             <input
@@ -115,7 +124,7 @@ export default class EditUsers extends Component {
           <div className="form-group">
             <input
               type="submit"
-              value="Create User"
+              value="Update user"
               className="btn btn-primary"
             />
           </div>
