@@ -6,7 +6,7 @@ export default class CreateUser extends Component {
     super(props);
 
     this.onChangeUsername = this.onChangeUsername.bind(this);
-    this.onChangeGender = this.onChangeGender.bind(this);
+    this.handleOptionChange = this.handleOptionChange.bind(this);
     this.onChangeAge = this.onChangeAge.bind(this);
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -34,11 +34,16 @@ export default class CreateUser extends Component {
   }
 
   onChangeUsername(e) {
-    this.setState({
-      username: e.target.value
-    });
+    if (!e.target.value) {
+      this.setState({ username: e.target.value });
+    } else {
+      this.setState({
+        username: e.target.value[0].toUpperCase() + e.target.value.slice(1)
+      });
+    }
   }
-  onChangeGender(e) {
+
+  handleOptionChange(e) {
     this.setState({
       usergender: e.target.value
     });
@@ -79,26 +84,47 @@ export default class CreateUser extends Component {
             <label>Username: </label>
             <input
               type="text"
-              required
+              required="true"
               className="form-control"
               value={this.state.username}
               onChange={this.onChangeUsername}
             />
           </div>
-          <div className="form-group">
-            <label>Gender: </label>
+          <div className="form-check">
             <input
-              type="text"
-              required
-              className="form-control"
-              value={this.state.usergender}
-              onChange={this.onChangeGender}
+              type="radio"
+              name="gender"
+              value="Male"
+              checked={this.state.usergender === "Male"}
+              onChange={this.handleOptionChange}
             />
+            Male
+          </div>
+          <div className="form-check">
+            <input
+              type="radio"
+              name="gender"
+              value="Female"
+              checked={this.state.usergender === "Female"}
+              onChange={this.handleOptionChange}
+            />
+            Female
+          </div>
+          <div className="form-check">
+            <input
+              type="radio"
+              name="gender"
+              value="Other"
+              checked={this.state.usergender === "Other"}
+              onChange={this.handleOptionChange}
+            />
+            Other
           </div>
           <div className="form-group">
             <label>Age: </label>
             <input
-              type="text"
+              type="number"
+              max="100"
               className="form-control"
               value={this.state.userage}
               onChange={this.onChangeAge}
