@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+// marked  out  because it crashed  the server
+////const mongoosePaginate = require("mongoose-paginate");
 
 const Schema = mongoose.Schema;
 
@@ -25,6 +27,8 @@ const userSchema = new Schema(
   },
   { timestamps: true }
 );
+// marked  out  because  it crashed  the server
+///userSchema.plugin(mongoosePaginate);
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;

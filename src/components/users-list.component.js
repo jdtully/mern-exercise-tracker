@@ -67,7 +67,7 @@ export default class UserList extends Component {
     return (
       <div>
         <h3>Users</h3>
-        <table className="table">
+        <table className="table tablesorter">
           <thead className="thead-light">
             <tr>
               <th>Username</th>
