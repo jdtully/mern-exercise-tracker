@@ -30,6 +30,7 @@ export default class EditUsers extends Component {
         console.log(error);
       });
   }
+
   onChangeUsername(e) {
     this.setState({
       username: e.target.value
