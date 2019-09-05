@@ -39,7 +39,7 @@ export default class UserList extends Component {
           offset: response.data.offset,
           limit: response.data.limit,
           total: response.data.total,
-          pageNo: response.data.offset / response.data.total + 1
+          pageNo: response.data.offset / response.data.limit + 1
         });
       })
       .catch(error => {
@@ -55,7 +55,7 @@ export default class UserList extends Component {
           offset: response.data.offset,
           limit: response.data.limit,
           total: response.data.total,
-          pageNo: response.data.offset / response.data.total + 1
+          pageNo: response.data.offset / response.data.limit + 1
         });
       })
       .catch(error => {
@@ -71,7 +71,7 @@ export default class UserList extends Component {
           offset: response.data.offset,
           limit: response.data.limit,
           total: response.data.total,
-          pageNo: response.data.offset / response.data.total + 1
+          pageNo: response.data.offset / response.data.limit + 1
         });
       })
       .catch(error => {
@@ -117,8 +117,27 @@ export default class UserList extends Component {
         </table>
         <div>page {this.state.pageNo}</div>
 
-        <button onClick={this.gotoPreviousPage}>PreviousPage</button>
-        <button onClick={this.gotoNextPage}>Next Page</button>
+        <button
+          disabled={this.state.pageNo === 1 ? true : false}
+          onClick={() => {
+            this.gotoPreviousPage();
+          }}
+        >
+          Previous Page
+        </button>
+        <button
+          disabled={
+            this.state.pageNo ===
+            Math.floor(this.state.total / this.state.limit) + 1
+              ? true
+              : false
+          }
+          onClick={() => {
+            this.gotoNextPage();
+          }}
+        >
+          Next Page
+        </button>
       </div>
     );
   }
